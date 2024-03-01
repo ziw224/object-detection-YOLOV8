@@ -19,11 +19,15 @@ class Tracker:
         self.center_points = {}
         self.id_count = 0
         self.trajectories = {}  # Store trajectories for each object
+        # Optional: Store additional object info (e.g., class IDs)
+        self.object_info = {}
 
     def update(self, objects_rect):
         objects_bbs_ids = []
         for rect in objects_rect:
-            x, y, w, h = rect
+            x, y, w, h, d= rect
+            conf = rect[5] if len(rect) > 5 else None  # Handle optional confidence score
+
             cx = (x + x + w) // 2
             cy = (y + y + h) // 2
 
@@ -33,7 +37,8 @@ class Tracker:
 
                 if dist < 35:
                     self.center_points[id] = (cx, cy)
-                    objects_bbs_ids.append([x, y, w, h, id])
+                    objects_bbs_ids.append([x, y, w, h, id, d])  # Include class ID
+                    self.object_info[id] = {'class_id': d, 'confidence': conf}  # Store additional info
                     same_object_detected = True
                     # Add position to trajectory
                     if id not in self.trajectories:
@@ -45,24 +50,8 @@ class Tracker:
                 self.center_points[self.id_count] = (cx, cy)
                 self.trajectories[self.id_count] = Trajectory()  # Create a new trajectory for the new object
                 self.trajectories[self.id_count].add_position((cx, cy))
-                objects_bbs_ids.append([x, y, w, h, self.id_count])
+                objects_bbs_ids.append([x, y, w, h, self.id_count, d])  # Include class ID
+                self.object_info[self.id_count] = {'class_id': d, 'confidence': conf}  # Store additional info
                 self.id_count += 1
 
-        new_center_points = {}
-        new_trajectories = {}
-        for obj_bb_id in objects_bbs_ids:
-            _, _, _, _, object_id = obj_bb_id
-            center = self.center_points[object_id]
-            new_center_points[object_id] = center
-            # Maintain trajectories for active objects
-            new_trajectories[object_id] = self.trajectories[object_id]
-
-        self.center_points = new_center_points.copy()
-        self.trajectories = new_trajectories
         return objects_bbs_ids
-
-    def draw_trajectories(self, frame):
-        for trajectory in self.trajectories.values():
-            positions = trajectory.get_positions()
-            for i in range(1, len(positions)):
-                cv2.line(frame, positions[i - 1], positions[i], (0, 0, 255), 2)
