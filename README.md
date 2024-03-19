@@ -41,10 +41,11 @@ gdown "https://drive.google.com/drive/folders/15IwffHIvdB5PsYfE5On0pjjDLZB3-j2i"
 ```
 python deep_sort_tracking_id.py --weights yolov7.pt  --img 640  --source test1.mp4 --view-img
 ```
-
+- Go to ./runs/detect/exp to check the saving videos
 
 ### RESULTS
 
 #### Vehicles Detection, Tracking and Counting 
 ![](figure1.png)
+
 
