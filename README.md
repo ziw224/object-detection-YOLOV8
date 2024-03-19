@@ -7,13 +7,11 @@ The google colab file link for YOLOv7 object detection and tracking is provided 
 [`Google Colab File`](https://colab.research.google.com/drive/1pODFnmwDI4To2bqnyD5OWOYXV8u43iu1?usp=sharing)
 
 
+- Reference: https://github.com/MuhammadMoinFaisal/YOLOv7-DeepSORT-Object-Tracking
 
 ## Steps to run Code
 
 - Clone the repository
-```
-git clone https://github.com/MuhammadMoinFaisal/YOLOv7-DeepSORT-Object-Tracking.git
-```
 - Goto the cloned folder.
 ```
 cd YOLOv7-DeepSORT-Object-Tracking
