@@ -160,20 +160,20 @@ def draw_boxes(img, bbox, names, object_id, identities=None, offset=(0, 0)):
         # Draw the box, label, and UI
         UI_box(box, img, label=label, color=color, line_thickness=2)
 
-        # Assuming data_deque[id][0] is the most recent position
-        last_known_pos = data_deque[id][0] if data_deque[id] else (x1, y1)
+        # # Assuming data_deque[id][0] is the most recent position
+        # last_known_pos = data_deque[id][0] if data_deque[id] else (x1, y1)
 
-        # Predict future position
-        future_pos = predict_future_position(data_deque[id], future_frames=10)  # Consider increasing future_frames for testing
-        if future_pos is not None:
-            future_pos_clipped = (max(0, min(future_pos[0], width - 1)), 
-                                max(0, min(future_pos[1], height - 1)))
+        # # Predict future position
+        # future_pos = predict_future_position(data_deque[id], future_frames=10)  # Consider increasing future_frames for testing
+        # if future_pos is not None:
+        #     future_pos_clipped = (max(0, min(future_pos[0], width - 1)), 
+        #                         max(0, min(future_pos[1], height - 1)))
 
-            # Debugging
-            print(f"Last known position: {last_known_pos}, Future position: {future_pos_clipped}")  # For debugging
+        #     # Debugging
+        #     print(f"Last known position: {last_known_pos}, Future position: {future_pos_clipped}")  # For debugging
 
-            # Ensure the prediction line is visually distinguishable
-            cv2.line(img, last_known_pos, future_pos_clipped, (0,0,255), thickness=2)
+        #     # Ensure the prediction line is visually distinguishable
+        #     cv2.line(img, last_known_pos, future_pos_clipped, (0,0,255), thickness=2)
 
         # Draw trail
         for j in range(1, len(data_deque[id])):

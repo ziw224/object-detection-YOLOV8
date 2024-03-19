@@ -12,7 +12,7 @@ The google colab file link for YOLOv7 object detection and tracking is provided 
 ## Steps to run Code
 
 - Clone the repository
-- Goto the cloned folder.
+- Go to the cloned folder.
 ```
 cd YOLOv7-DeepSORT-Object-Tracking
 ```
@@ -26,26 +26,25 @@ pip install -r requirements.txt
 
 - Downloading the DeepSORT Files From The Google Drive 
 ```
-
 https://drive.google.com/drive/folders/1kna8eWGrSfzaR6DtNJ8_GchGgPMv3VC8?usp=sharing
 ```
 - After downloading the DeepSORT Zip file from the drive, unzip it go into the subfolders and place the deep_sort_pytorch folder into the YOLOv7-DeepSORT-Object-Tracking folder
 
 - Downloading a Sample Video from the Google Drive
 ```
-gdown "https://drive.google.com/uc?id=1rjBn8Fl1E_9d0EMVtL24S9aNQOJAveR5&confirm=t"
+gdown "https://drive.google.com/drive/folders/15IwffHIvdB5PsYfE5On0pjjDLZB3-j2i"
 ```
 
 - Run the code with mentioned command below.
 
 - For yolov7 object detection + Tracking
 ```
-python deep_sort_tracking_id.py --weights yolov7.pt  --img 640  --source test1.mp4  
+python deep_sort_tracking_id.py --weights yolov7.pt  --img 640  --source test1.mp4 --view-img
 ```
 
 
 ### RESULTS
 
 #### Vehicles Detection, Tracking and Counting 
-![](./figure1.png)
+![](./runs/detect/exp/test1.mp4)
 
