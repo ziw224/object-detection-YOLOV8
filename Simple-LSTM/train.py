@@ -23,8 +23,8 @@ def build_model():
 
 def train_and_save_predictions():
     # Define the training parameters
-    batch_size = 32  # Adjust as needed
-    seq_length = 8
+    batch_size = 50  # Adjust as needed
+    seq_length = 5
     num_epochs = 200 # Adjuest as needed
 
     # Initialize list to keep track of loss values

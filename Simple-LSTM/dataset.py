@@ -7,12 +7,14 @@ class DataLoader():
 
     def __init__(self, batch_size=50, seq_length=5, datasets=[0, 1, 2, 3, 4], forcePreProcess=False):
         # List of data directories where raw data resides
-        self.data_dirs = ['./data/eth/univ', './data/eth/hotel',
-                         './data/ucy/zara/zara01', './data/ucy/zara/zara02',
-                         './data/ucy/univ']
+        self.data_dirs = ['./data/new']
         # self.data_dirs = ['./data/eth/univ', './data/eth/hotel']
 
-        self.used_data_dirs = [self.data_dirs[x] for x in datasets]
+        try:
+            self.used_data_dirs = [self.data_dirs[x] for x in datasets]
+        except IndexError as e:
+            print(f"An index in 'datasets' is out of range: {e}")
+            # Handle the error appropriately, maybe by setting a default directory or halting execution gracefully.
 
         # Data directory where the pre-processed pickle file resides
         self.data_dir = './data'
@@ -36,47 +38,50 @@ class DataLoader():
         self.reset_batch_pointer()
 
     def preprocess(self, data_dirs, data_file):
-        all_ped_data = {}
+        all_vehicle_data = {}
         dataset_indices = []
-        current_ped = 0
+        current_vehicle = 0
         # For each dataset
         for directory in data_dirs:
-            # Define the path to its respective csv file
-            file_path = os.path.join(directory, 'pixel_pos.csv')
-
-            print("processing {}".format(file_path))
+            # Adjust the file path for your new CSV files
+            file_path = os.path.join(directory, 'vehicle_data_1.csv')
+            print("Processing {}".format(file_path))
 
             # Load data from the csv file
-            # Data is a 4 x numTrajPoints matrix
-            # where each column is a (frameId, pedId, y, x) vector
             data = np.genfromtxt(file_path, delimiter=',')
 
-            # Get the number of pedestrians in the current dataset
-            numPeds = np.size(np.unique(data[1, :]))
+            # Assuming the first column is the object ID
+            unique_vehicles = np.unique(data[:, 0])
 
-            # For each pedestrian in the dataset
-            for ped in range(1, numPeds+1):
-                # Extract trajectory of the current ped
-                traj = data[:, data[1, :] == ped]
-                # Format it as (x, y, frameId)
-                traj = traj[[3, 2, 0], :]
+            for vehicle_id in unique_vehicles:
+                # Filter data for the current vehicle
+                vehicle_data = data[data[:, 0] == vehicle_id, :]
+
+                # Calculate the center of the bounding box
+                x_center = (vehicle_data[:, 2] + vehicle_data[:, 3]) / 2
+                y_center = (vehicle_data[:, 4] + vehicle_data[:, 5]) / 2
+
+                # Assuming the second column is the frame number
+                frame_ids = vehicle_data[:, 1]
+
+                # Combine the new x, y centers with their frame IDs
+                traj = np.vstack((frame_ids, x_center, y_center)).T
 
                 # Store this in the dictionary
-                all_ped_data[current_ped + ped] = traj
+                all_vehicle_data[current_vehicle + int(vehicle_id)] = traj
 
             # Current dataset done
-            dataset_indices.append(current_ped+numPeds)
-            current_ped += numPeds
+            dataset_indices.append(current_vehicle + len(unique_vehicles))
+            current_vehicle += len(unique_vehicles)
 
-            print("total ped nums: {}".format(numPeds))
+            print("Total vehicle numbers: {}".format(len(unique_vehicles)))
 
-        # The complete data is a tuple of all pedestrian data, and dataset ped indices
-        complete_data = (all_ped_data, dataset_indices)
+        # The complete data is a tuple of all vehicle data and dataset vehicle indices
+        complete_data = (all_vehicle_data, dataset_indices)
         # Store the complete data into the pickle file
         f = open(data_file, "wb")
         pickle.dump(complete_data, f, protocol=2)
         f.close()
-
     def load_preprocessed(self, data_file):
         # Load data from the pickled file
         f = open(data_file, "rb")
