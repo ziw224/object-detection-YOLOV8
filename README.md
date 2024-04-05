@@ -16,9 +16,7 @@ This project showcases object detection using YOLO v8, extended with LSTM and li
 
 ## Demonstrations and Visualizations (Running visual.py)
 
-- Insert link to demonstration video here.
-- ![Loss Visualization](./YOLO-V8-LSTM/loss_image.png)
-- ![Ground Truth vs Prediction](./YOLO-V8-LSTM/prediction_comparison_image.png)
+<img src="./YOLO-V8-LSTM/loss_image.png" width="425"/> <img src="./YOLO-V8-LSTM/prediction_comparison_image.png" width="425"/> 
 
 ## Getting Started
 
