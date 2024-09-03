@@ -25,9 +25,15 @@ The project is divided into two main components: `yolo-v8-LSTM` for LSTM-based p
 
 ## Demonstrations and Visualizations (Running visual.py)
 
-The `visual.py` script in **yolo-v8-LSTM** was created to generate the training loss per batch and visualize the ground truth trajectory (green line) versus the predicted trajectory (red line)
+The `visual.py` script in **yolo-v8-LSTM** was created to 
 
-<img src="./YOLO-V8-LSTM/loss_image.png" width="425"/> <img src="./YOLO-V8-LSTM/prediction_comparison_image.png" width="425"/> 
+- Generate the training loss per batch
+
+<img src="./YOLO-V8-LSTM/loss_image.png" width="425"/> 
+
+- Visualize the ground truth trajectory (green line) versus the predicted trajectory (red line)
+
+<img src="./YOLO-V8-LSTM/prediction_comparison_image.png" width="425"/> 
 
 ## Getting Started
 
