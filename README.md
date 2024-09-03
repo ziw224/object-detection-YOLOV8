@@ -1,6 +1,6 @@
 # Object Detection with YOLO v8
 
-### [Video](https://drive.google.com/drive/folders/18tSkMfpN0YxovjfcunCJSXr6kP-PToug)
+### [Output Video](https://drive.google.com/drive/folders/18tSkMfpN0YxovjfcunCJSXr6kP-PToug)
 
 
 ## Description
