@@ -1,6 +1,15 @@
 # Object Detection with YOLO v8
 
-This project showcases object detection using YOLO v8, extended with LSTM and linear regression models for predicting object trajectories in video streams. The project is divided into two main components: `yolo-v8-LSTM` for LSTM-based prediction and annotation, and `yolo-v8-regression` for a streamlined regression-based approach.
+### [Video](https://drive.google.com/drive/folders/18tSkMfpN0YxovjfcunCJSXr6kP-PToug)
+
+
+## Description
+
+This independent research project focuses on predicting vehicle and pedestrian trajectories to enhance Advanced Driver Assistance Systems (ADAS). The system analyzes live highway video streams to detect and track objects using YOLO v8. By applying YOLOv8 tracking to each frame, I collected detailed data, including the detected objects' x and y coordinates and class names. This data was stored in a CSV file (`./YOLO-V8-LSTM/video_data/object_tracking_info.csv`), recording the trajectories of each object over time.
+
+Using this dataset, I developed two predictive models: one utilizing LSTM (Long Short-Term Memory) networks and the other based on linear regression. These models were trained to forecast the future trajectories of the detected objects in a separate live-stream testing video. 
+
+The project is divided into two main components: `yolo-v8-LSTM` for LSTM-based prediction and annotation, and `yolo-v8-regression` for a streamlined regression-based approach.
 
 ## Repository Structure
 
@@ -16,6 +25,8 @@ This project showcases object detection using YOLO v8, extended with LSTM and li
 
 ## Demonstrations and Visualizations (Running visual.py)
 
+The `visual.py` script in **yolo-v8-LSTM** was created to generate the training loss per batch and visualize the ground truth trajectory (green line) versus the predicted trajectory (red line)
+
 <img src="./YOLO-V8-LSTM/loss_image.png" width="425"/> <img src="./YOLO-V8-LSTM/prediction_comparison_image.png" width="425"/> 
 
 ## Getting Started
@@ -27,7 +38,5 @@ To run the scripts in YOLO-V8-LSTM:
 3. Run `detect.py` in `yolo-v8-LSTM` to start object detection and saving.
 4. Use `train_video.py` for LSTM model training and video annotation.
 
-To run the scripts in YOLO-V8-LSTM:
+To run the scripts in YOLO-V8-Regression:
 1. For regression-based predictions on live video, run the script in `yolo-v8-regression`.
-
-See script documentation for more detailed instructions.
