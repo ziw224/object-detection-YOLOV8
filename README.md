@@ -5,7 +5,7 @@
 
 ## Description
 
-This independent research project focuses on predicting vehicle and pedestrian trajectories to enhance Advanced Driver Assistance Systems (ADAS). The system analyzes live highway video streams to detect and track objects using YOLO v8. By applying YOLOv8 tracking to each frame, I collected detailed data, including the detected objects' x and y coordinates and class names. This data was stored in a CSV file (`./YOLO-V8-LSTM/video_data/object_tracking_info.csv`), recording the trajectories of each object over time.
+This independent research project focuses on predicting vehicle and pedestrian trajectories to enhance Advanced Driver Assistance Systems (ADAS). The system analyzes live highway video streams to detect and track objects using YOLO v8. By applying YOLOv8 tracking to each frame, I collected detailed data, including the detected objects' x and y coordinates and class names. This data was stored in a [CSV file](./YOLO-V8-LSTM/video_data/object_tracking_info.csv), recording the trajectories of each object over time.
 
 Using this dataset, I developed two predictive models: one utilizing LSTM (Long Short-Term Memory) networks and the other based on linear regression. These models were trained to forecast the future trajectories of the detected objects in a separate live-stream testing video. 
 
